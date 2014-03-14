@@ -32,7 +32,10 @@ def build_petrel():
     if os.path.isdir('petrel/generated'):
         shutil.rmtree('petrel/generated')
     os.mkdir('petrel/generated')
-    f_url = urllib2.urlopen('https://raw.github.com/apache/incubator-storm/%s/src/storm.thrift' % version)
+    if version == '0.9.1-incubating':
+        f_url = urllib2.urlopen('https://raw.github.com/apache/incubator-storm/%s/storm-core/src/storm.thrift' % version)
+    else:
+        f_url = urllib2.urlopen('https://raw.github.com/apache/incubator-storm/%s/src/storm.thrift' % version)
 
     with open('storm.thrift', 'w') as f:
         f.write(f_url.read())
